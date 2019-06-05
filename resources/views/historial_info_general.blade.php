@@ -16,7 +16,7 @@
                             <label class="titulo-label">Periodo:</label>
                         </div>
                         <div class="col-sm">
-                            <select  class="form-control" name="periodo" id="periodo">
+                            <select  class="form-control" style="height:30px" name="periodo" id="periodo">
                                 <option value="">Seleccionar</option>
                                 @foreach($periodos as $per)
                                     <option value="{{$per->id}}">{{$per->nombre}}</option>

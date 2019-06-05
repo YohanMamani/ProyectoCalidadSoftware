@@ -78,7 +78,13 @@ class GrupoController extends Controller
                 'periodo_id' => $periodo_actual->id,
                 'nro_matriculados' => 0 //default
         ]);
-        return view('index');
+
+        $confirmación="registro correctamente";
+        $profesores = Profesor::all();
+        $modulos = Modulo::all();
+        $turnos = Turno::all();
+        $frecuencias = Frecuencia::all();
+        return view('asignar_profesor',compact('profesores','modulos','turnos','frecuencias','confirmación'));
     }
 
     /**

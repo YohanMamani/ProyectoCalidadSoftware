@@ -13,7 +13,7 @@
                     <div class="form-row"> 
                         <div class="form-group col-md-9">
                             <label class="titulo-label">Nombres</label>
-                            <select  class="form-control" name="nombres">
+                            <select  class="form-control"  name="nombres">
                                    <option value="">Seleccionar</option>
                                     @foreach($alumnos as $alu)
                                         <option value="{{$alu->dni}}">{{$alu->nombres}}</option>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group col-md-1">
                             <label class="titulo-label">Grupo</label>
-                            <select  class="form-control" id="grupo" name="grupo">
+                            <select  class="form-control" id="grupo"  name="grupo">
                                    
                             </select>
                         </div>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     
-                    <div class="form-row">
+                    <div class="row">
                         <div class="form-group col-md-5">
                             <label class="titulo-label">Frecuencia</label>
                             <input type="text" class="form-control" id="frecuencia" autofocus>    
@@ -73,5 +73,23 @@
                 </form>
                             
     </div>
+<div class="modal modal-danger fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+ <h4 class="modal-title" id="myModalLabel">Confirmación</h4>   
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+          <div class="modal-body">
+            <div class="titulo-label">                <p class="text-center">
+                <strong>SE REALIZÓ LA MATRICULA CON ÉXITO</strong>
+                </p></div>
 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">ACEPTAR</button>
+          </div>
+    </div>
+  </div>
+</div>
 @endsection

@@ -11,17 +11,20 @@
             <thead class="bg-primary">
                 <tr>
                     <th scope="col" width="15%">#Matrícula</th>
-                    <th scope="col" width="15%">Numero de recibo</th>
+                    <th scope="col" width="15%">Nro. recibo</th>
                     <th scope="col" width="15%">DNI</th>
                     <th scope="col" width="15%">Fecha</th>
                     <th scope="col" width="15%">Monto</th>
                     <th scope="col" width="15%">Grupo</th>
+                    <th scope="col" width="15%">Periodo</th>
                     <th scope="col" width="10%">Detalle</th>
                     <th scope="col" width="10%">Descarga</th>
                 </tr>
             </thead>
             <tbody>
+                   <?php $fil=0 ?>
                 @foreach($matriculs as $mtc)
+                   
                     <tr>
                         <th scope="row">{{ $mtc->id }}</th>
                         <td>{{ $mtc->numReciboPago }}</td>
@@ -29,7 +32,9 @@
                         <td>{{ $mtc->fecMat }}</td>
                         <td>{{ $mtc->montoLabo }}</td>
                         <td>{{ $mtc->grupo_id }}</td>
-                                
+                        <td>{{ $periodo[$fil]->nombre }}</td>
+                        <?php $fil++ ?>
+        
                                 <!--<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#show">Ver</button></td>-->
                         <td><a href="{{ route('matricula.detalle',['idgrupo'=>$mtc->grupo_id]) }}" class="show-modal btn btn-info btn-sm" >Ver</a>
                         </td>

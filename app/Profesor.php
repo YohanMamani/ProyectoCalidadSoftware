@@ -14,5 +14,12 @@ class Profesor extends Model
         return $profesor;
     }
     
+     public static function getProfesorpordni($dni){
+
+        return Profesor::where('dni','=',$dni )->get();
+        
+    }
+
+        
     
 }

@@ -15,7 +15,7 @@
                         <label class="titulo-label">Nombre</label>
                         <input type="text" class="form-control" value="{{$periodo->nombre}}" name="nombre" id="nombre" required>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="titulo-label">Fecha de Inicio</label>
                             <input type="date" class="form-control" value="{{$periodo->fechaInicio}}" name="fecha-inicio" id="fecha-inicio" required>
@@ -24,9 +24,9 @@
                             <label class="titulo-label">Fecha de Término</label>
                             <input type="date" class="form-control" value="{{$periodo->fechaFin}}" name="fecha-fin" id="fecha-fin" required>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 ">
                             <label class="titulo-label">Estado</label>
-                            <select  class="form-control" name="estado" id="estado">
+                            <select  class="form-control"  name="estado" id="estado">
                             @if($periodo->estado == 1)
                                 <option value="1" selected>Activo</option>
                                 <option value="0">No activo</option>
@@ -37,10 +37,11 @@
                             </select>
                         </div>
                     </div>
-                    
+                    <div class="row">
                     <div class="botones">
                         <button type="submit" class="btn boton-registrar btn-success col-xs-4">Modificar</button>
                         <button type="reset" class="btn boton-limpiar btn-warning col-xs-4">Limpiar</button>
+                    </div>
                     </div>
 
 

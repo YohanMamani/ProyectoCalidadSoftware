@@ -53,16 +53,16 @@
                                         <a href="{{ route('alumno.create')}}">Agregar <!--<span class="badge badge-pill badge-success">Pro</span>--></a>
                                     </li>
                                     <li>
-                                        <a href="">Buscar</a>
+                                        <a href="/buscaralumno">Buscar</a>
                                     </li>
                                     <li>
-                                        <a href="">Editar</a>
+                                        <a href="/editar_alumno">Editar</a>
                                     </li>
                                     <li>
-                                        <a href="">Eliminar</a>
+                                        <a href="/eliminaralumno">Eliminar</a>
                                     </li>
                                     <li>
-                                        <a href="">Ver Todo</a>
+                                        <a href="{{ route('reporte.alumnosall')}}">Ver Todo</a>
                                     </li>
                                 </ul>
                             </div>
@@ -80,13 +80,13 @@
                                         <a href="/profesor/create">Agregar</a>
                                     </li>
                                     <li>
-                                        <a href="">Buscar</a>
+                                        <a href="/buscarprofesor">Buscar</a>
                                     </li>
                                     <li>
                                         <a href="/editar_profesor">Editar</a>
                                     </li>
                                     <li>
-                                        <a href="">Eliminar</a>
+                                        <a href="/eliminarprofesor">Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="/listarProfesores">Ver Todo</a>
@@ -105,16 +105,7 @@
                                         <a href="/showRegistroFamiliaProfesional">Agregar</a>
                                     </li>
                                     <li>
-                                        <a href="">Buscar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Editar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Eliminar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Ver Todo</a>
+                                        <a href="/reportes/familias">Ver Todo</a>
                                     </li>
                                 </ul>
                             </div>
@@ -130,16 +121,7 @@
                                         <a href="/showRegistroOpcionOcupacional">Agregar</a>
                                     </li>
                                     <li>
-                                        <a href="">Buscar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Editar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Eliminar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Ver Todo</a>
+                                        <a href="/reportes/opciones">Ver Todo</a>
                                     </li>
                                 </ul>
                             </div>
@@ -155,16 +137,7 @@
                                         <a href="/showRegistroModulo">Agregar</a>
                                     </li>
                                     <li>
-                                        <a href="">Buscar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Editar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Eliminar</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Ver Todo</a>
+                                        <a href="/reportes/modulos">Ver Todo</a>
                                     </li>
                                 </ul>
                             </div>
@@ -208,15 +181,7 @@
                                     <li>
                                         <a href="{{ route('reporte.alumnos')}}">Reporte de alumnos matriculados</a>
                                     </li>
-                                    <li>
-                                        <a href="">Reporte de ...</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Reporte de ...</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Reporte de ...</a>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </li>

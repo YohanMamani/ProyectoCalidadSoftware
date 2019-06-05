@@ -1,6 +1,6 @@
 $("#tag").change(function(event){
         $.get("/obtenerProfesor/"+event.target.value+"",function(response,profesor){
-      //      console.log(response);
+            console.log(response);
             $("#nombres").val(response.nom_prof);
             $("#apellido-materno").val(response.apeMaterno_prof);
             $("#apellido-paterno").val(response.apePaterno_prof);
@@ -12,6 +12,8 @@ $("#tag").change(function(event){
             $("#dni").val(response.dni);
             $("#correo").val(response.correo);
             $("#idprof").val(response.id);
+                    console.log("ASSDASD");
+
         });    
     
 });

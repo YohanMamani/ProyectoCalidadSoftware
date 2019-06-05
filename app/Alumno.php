@@ -16,9 +16,15 @@ class Alumno extends Model
         return $this->hasMany(Matricula::class,'estudiante_dni','dni');
     }
 
-    static function getAlumno($correo){
+    static function getAlumn($correo){
         return Alumno::where('correo',compact('correo'))->first();
     }
+
+    static function getAlumno($dni){
+        
+        return Alumno::where('dni','=',$dni )->get();
+    }
+    
 
     function distrito(){
         return $this->belongsTo(Distrito::class);

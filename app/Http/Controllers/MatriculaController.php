@@ -87,8 +87,10 @@ class MatriculaController extends Controller
         $matriculados = $grupo->nro_matriculados; 
         $grupo->nro_matriculados = $matriculados + 1;
         $grupo->save();
-        
-        return view('index');
+        $confirmación="registro correctamente";
+        $modulos = Modulo::all();
+        $alumnos = Alumno::all();
+        return view('matricula_formulario',compact('modulos','alumnos','confirmación'));
     }
 
     /**
@@ -140,7 +142,8 @@ class MatriculaController extends Controller
         /**
          * MOSTRAR A TODOS LOS ALUMNOS MATRICULADOS
          */
-        $matriculas=Matricula::all();
+        $periodo_actual = Periodo::where('estado',1)->first();
+        $matriculas=Matricula::where('periodo_id',$periodo_actual->id)->get();
 
         $new_alumno=collect(new Alumno);
         $new_modulo=collect(new Modulo);

@@ -7,8 +7,12 @@
                 <div class="titulo-formulario">
                     <h2>Registrar <span>Alumno</span></h2>
                 </div>
-
-                <form class="formulario" action="{{ route('alumno.store') }}"  role="form"   method="POST">
+               @if(Session::has('message'))
+                <div class="alert alert-danger" role="alert">
+                {{Session::get('message')}}
+                </div>      
+                @endif
+                <form class="formulario" action="{{ route('alumno.registrarte') }}"  role="form"   method="POST">
                     {{csrf_field()}}
                     <fieldset>
                         <legend>Datos personales</legend>
@@ -37,7 +41,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="titulo-label">Sexo</label>                            
-                                <select  class="form-control" name="sexo">
+                                <select  class="form-control" style="height:30px"   name="sexo">
                                     <option value="m" selected>Masculino</option>
                                     <option value="f">Femenino</option>
                                 </select>
@@ -53,7 +57,7 @@
                         <div class="form-row">
                         <div class="form-group col-md-4">
                             <label class="titulo-label">Estado Civil</label>                            
-                            <select  class="form-control" name="estado-civil">
+                            <select  class="form-control" style="height:30px" name="estado-civil">
                                 <option value="soltero" selected>Soltero</option>
                                 <option value="casado">Casado</option>
                                 <option value="viudo">Viudo</option>
@@ -62,7 +66,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="titulo-label">Grado de Instrucción</label>                            
-                            <select  class="form-control" name="grado-instruccion">
+                            <select  class="form-control"  style="height:30px" name="grado-instruccion">
                                 <option value="secundaria" selected>Secundaria completa</option>
                                 <option value="tecnico">Estudios técnicos</option>
                                 <option value="superior">Estudios superiores</option>
@@ -105,7 +109,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label class="titulo-label">Distrito</label>                            
-                                <select  class="form-control" name="distrito">
+                                <select  class="form-control" style="height:30px" name="distrito" required>
                                     <option value="" selected>Seleccionar</option>
                                     @foreach($distritos as $dis)
                                         <option value="{{$dis->id}}">{{$dis->nombre}}</option>
@@ -114,7 +118,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="titulo-label">Provincia</label>                            
-                                <select  class="form-control" name="provincia">
+                                <select style="height:30px" class="form-control" name="provincia" required>
                                     <option value="" selected>Seleccionar</option>
                                     @foreach($provincias as $prov)
                                         <option value="{{$prov->id}}">{{$prov->nombre}}</option>
@@ -123,7 +127,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="titulo-label">Departamento</label>                            
-                                <select  class="form-control" name="departamento">
+                                <select style="height:30px" class="form-control" name="departamento" required>
                                     <option value="" selected>Seleccionar</option>
                                     @foreach($departamentos as $dep)
                                         <option value="{{$dep->id}}">{{$dep->nombre}}</option>
@@ -137,8 +141,26 @@
                         <button type="submit" class="btn boton-registrar btn-success col-xs-4">Registrar</button>
                         <button type="reset" class="btn boton-limpiar btn-warning col-xs-4">Limpiar</button>
                     </div>
-                </form>
-            
+                </form>         
     </div>
 
+<div class="modal modal-danger fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+ <h4 class="modal-title" id="myModalLabel">Confirmación</h4>   
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+          <div class="modal-body">
+            <div class="titulo-label">                <p class="text-center">
+                <strong>SE REALIZÓ EL REGISTRO CON ÉXITO</strong>
+                </p></div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">ACEPTAR</button>
+          </div>
+    </div>
+  </div>
+</div>
 @endsection

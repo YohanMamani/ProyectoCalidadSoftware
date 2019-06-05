@@ -13,4 +13,8 @@ class Modulo extends Model
         'estado',
         'periodo_id'
     ];
+
+    static function getmodulo($id){
+        return Modulo::where('id','=',$id )->get();
+    }
 }

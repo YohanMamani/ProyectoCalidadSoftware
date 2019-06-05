@@ -15,8 +15,8 @@
 
             <div class="form-group">
                 <label class="titulo-label">Familia profesional</label>
-                <select  class="form-control" name="familia">
-                    <option value="-1" selected>Seleccionar Familia Profesional</option>
+                <select  class="form-control" style="height:30px" name="familia"  required>
+                    <option value="" selected>Seleccionar Familia Profesional</option>
                     @foreach($FamiliasProf as $Famprof)
                     <option value="{{$Famprof->id}}">{{$Famprof->nombreFP}}</option>
                     @endforeach
@@ -29,4 +29,23 @@
 
         </form>
     </div>
+
+    <div class="modal modal-danger fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+ <h4 class="modal-title text-center" id="myModalLabel" style="color:red";>Confirmación</h4>   
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+          <div class="modal-body">
+                <p class="text-center">
+                <strong>SE REALIZÓ EL REGISTRO CON ÉXITO</strong>
+                </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">ACEPTAR</button>
+          </div>
+    </div>
+  </div>
+</div> 
 @endsection

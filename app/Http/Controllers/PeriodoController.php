@@ -25,7 +25,11 @@ class PeriodoController extends Controller
         $periodos = Periodo::all();
         return view('mant_periodo_academico',compact('periodos'));
     }
-
+    public function mostrarperiodos()
+    {
+        $periodos = Periodo::all();
+        return view('mant_periodo_academico',compact('periodos'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -33,7 +37,7 @@ class PeriodoController extends Controller
      */
     public function create()
     {
-        //
+        return view("periodo_registrar");
     }
 
     /**
@@ -44,8 +48,23 @@ class PeriodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if(request('fecha-inicio')>=request('fecha-fin')){
+        $periodos = Periodo::all();
+        $truero="error"; 
+        return view('mant_periodo_academico',compact('periodos','truero'));
+        }
+        Periodo::create([
+                'nombre' => request('nombre'),
+                'fechaInicio' => request('fecha-inicio'),
+                'fechaFin' => request('fecha-fin'),
+                'estado' => 0
+        ]);
+        
+        $periodos = Periodo::all();
+        return view('mant_periodo_academico',compact('periodos'));
     }
+
 
     /**
      * Display the specified resource.
@@ -148,12 +167,14 @@ class PeriodoController extends Controller
             $modulo_top = $modulodetalles[$indice_mayor]['modulo'];
             $modulo_top_matriculas = $modulodetalles[$indice_mayor]['nro_matriculados'];
             $modulo_top_grupos = $modulodetalles[$indice_mayor]['nro_grupos'];
-
+            
+            
             $penultimo_periodo = Periodo::find($id-1);
+            
             if($penultimo_periodo == null){
-                $diferencia_alumnos = $nro_alumnos;
+                $diferencia_alumnos = 0;
             }else{
-                $alumnos_periodoanterior = DB::table('matriculas')->distinct('estudiante_dni')->where('periodo_id',$id-1)->get();
+                $alumnos_periodoanterior = DB::table('matriculas')->distinct('estudiante_dni')->where('periodo_id',$penultimo_periodo->id)->get();
                 $nro_alumnos_peranterior = count($alumnos_periodoanterior);
                 $diferencia_alumnos = $nro_alumnos - $nro_alumnos_peranterior;
             };
@@ -179,6 +200,14 @@ class PeriodoController extends Controller
         return view('historial_info_general',compact('periodos'));
     }
     
+    public function eliminandoperiodo(Request $request){
+        $id = request('category_id');
+        $periodo = Periodo::getPeriodo($id);
+        $periodo->each->delete();
+        return redirect()->route('mostrar.modulosalll');
+
+    }
+ 
     public function mostrar_datos_modulo(){
         $periodos = Periodo::all();
         return view('historial_modulos',compact('periodos'));

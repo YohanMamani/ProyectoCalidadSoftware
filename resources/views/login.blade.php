@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 
@@ -27,7 +27,6 @@
 		<div class="container-login100" style="background-image: url(/img/bg-01.jpg)">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-60 p-b-45"> 
 				<header> </header>
-				
 				@if(session()->has('flash'))
             		<div class="alert alert-info"> {{ session('flash') }}</div>
        			@endif
@@ -70,6 +69,18 @@
 			</div>
 		</div>
 	</div>
+<script src="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.js"></script>
+
+		@include('Alerts::alerts')
+
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <ul>
+            <li>{!! \Session::get('success') !!}</li>
+        </ul>
+    </div>
+@endif
 
 </body>
+
 </html>

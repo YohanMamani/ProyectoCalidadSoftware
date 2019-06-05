@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
 
 class LoginController extends Controller
@@ -22,6 +23,7 @@ class LoginController extends Controller
         // el guest es un namespace de app\http\middleware\RedirectIfAuthenticated
     }
     function showLoginForm(){
+
         return view('login');
     }
 
@@ -35,13 +37,14 @@ class LoginController extends Controller
         
         //devuelve un boolean accediando a la tabla users , si es que el usuario existe o no 
         if(Auth::attempt($credentials)){ //intentaremos iniciar la sesion del usuario
-           
+
         }
         
         //retornar hacia atras con los errores si el usuario no es correcto
-        return back()
+       //para pasarle al 'old' del html 
+        return redirect()->back()
         ->withErrors(['email'=>trans('auth.failed')])
-        ->withInput(request(['email'])); //para pasarle al 'old' del html 
+        ->withInput(request(['email']));
     }
 
     function logout(){

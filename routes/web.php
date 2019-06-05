@@ -25,8 +25,10 @@ Route::get('/homeadmin',function(){
 
 // *********** GESTION DE PERIODOS ACADEMICOS E HISTORIAL******************************* //
 Route::resource('periodo','PeriodoController');
-Route::get('/infogeneral','PeriodoController@mostrar_datos_generales');
+Route::get('/infogeneral','PeriodoController@mostrar_datos_generales')->name('mostrar.periodos');
 Route::get('/obtenerHistorialGeneral/{id}','PeriodoController@obtener_DatosGenerales');
+Route::get('/obtenerHistorial/sdfsd','PeriodoController@mostrarperiodos')->name('mostrar.modulosalll');
+
 Route::get('/historialmodulos','PeriodoController@mostrar_datos_modulo');
 Route::get('/obtenerDatosModulo/{id}','PeriodoController@obtener_datos_modulo');
 
@@ -43,6 +45,9 @@ Route::resource('profesor','ProfesorController');
 Route::get('/editar_profesor','ProfesorController@edit_inicial' );
 Route::post('/modificarprofesor','ProfesorController@modificar' );
 Route::get('/obtenerProfesor/{id}','ProfesorController@obtenerProfesor' );
+
+Route::get('/eliminarprofesor','ProfesorController@eliminarprofesorpag' ); 
+
 
 Route::get('/perfilprofesor','ProfesorController@verPerfil' );
 Route::get('/modulosprofesor','ProfesorController@verModulos' );
@@ -64,6 +69,8 @@ Route::get('/obtenergrupo/{id}','GrupoController@BuscarGrupo');
 Route::resource('matricula','MatriculaController');
 Route::get('/traerfrecuencia/{id}','MatriculaController@obtenerFrecuencia');
 Route::get('/traerturno/{id}','MatriculaController@obtenerTurno');
+Route::get('/vista/alumnos','AlumnoController@registraralumno')->name('registrar.alumno');
+Route::get('/vista/profes','ProfesorController@registrarprofesor')->name('registrar.profesor');
 
 Route::get('/consultarMatriculados',function(){
     return view('alumno_matriculados');
@@ -71,17 +78,90 @@ Route::get('/consultarMatriculados',function(){
 
 Route::get('/reportes/alumnos','MatriculaController@mostrarMatriculados')->name('reporte.alumnos');
 
+Route::get('/reportes/alumnosall','AlumnoController@mostraralumnos')->name('reporte.alumnosall');
+
+Route::get('/reportes/familias','FamiliaprofesionalController@mostrarfamilias')->name('reporte.fpall');
+
+Route::get('/reportes/modulos','ModuloController@mostrarmodulo')->name('reporte.modulosall');
+
+Route::get('/reportes/opciones','OpcionocupacionalController@mostraropciones')->name('reporte.opcionesall');
+
+Route::post('/modificaralumno','AlumnoController@modificar' );
+
+Route::get('/buscaralumno','AlumnoController@buscaralumnopag' ); 
+
+Route::get('/buscarprofesor','ProfesorController@buscarprofesorpag');
+
+Route::post('/buscarprofesor/pordni','ProfesorController@buscarprofesor');
+
+Route::post('/profesor/eliminarpordni','ProfesorController@eliminandoprofesor');
+
+Route::post('/familia/eliminarporid','FamiliaprofesionalController@eliminandofamilia');
+
+Route::post('/modulos/eliminarporid','ModuloController@eliminandomodulo');
+
+Route::post('/periodos/eliminarporid','PeriodoController@eliminandoperiodo');
+
+Route::get('/eliminaralumno','AlumnoController@alumnoeliminar' )->name('alumno.eliminar'); ; 
+
+Route::get('/eliminarprofesor','ProfesorController@profesoreliminar' )->name('profesor.eliminar'); ; 
+
+Route::post('/buscarparaeliminar/pordni','AlumnoController@buscaralumnoeliminar' );
+
+Route::post('/buscarprofesoreliminar/pordni','ProfesorController@buscarprofesoreliminar' );
+
+
+
+Route::get('/obtenerAlumno/{dni}','AlumnoController@obtenerAlumno' );
+
+Route::get('/alumno/{dni}/destroy',[
+'uses'=>'AlumnoController@eliminaralumno',
+'as'=>'eliminar.alumno'] );
+
+
+
+Route::get('/familias/{dni}/destroy',[
+'uses'=>'FamiliaprofesionalController@eliminarfamilia',
+'as'=>'eliminar.familia'] );
+
+Route::delete('/opciones/{category}', 'OpcionocupacionalController@eliminaropcion')->name('eliminar.opcion');
+
+Route::delete('/alumno/{category}', 'AlumnoController@eliminaralumno')->name('eliminar.alumno');
+
+Route::delete('/profesor/{category}','ProfesorController@eliminarprofesor')->name('eliminar.profesor');
+Route::delete('/modulo/{category}','ModuloController@eliminarmodulo')->name('eliminar.modulo');
+
+Route::post('/familia/actualizarfamilia','FamiliaprofesionalController@actualizarfamiliares');
+
+Route::post('/opcion/actualizaropcion','OpcionocupacionalController@actualizaropciones');
+
+Route::post('/modulos/actualizarmodulo','ModuloController@actualizarmodulo');
+
+
+Route::get('/modulos/{dni}/destroy',[
+'uses'=>'ModuloController@eliminarmodulo',
+'as'=>'eliminar.modulo'] );
+
+Route::post('/buscardetallealumno','AlumnoController@buscardetalle' );
+
+Route::post('/buscaralumnos/pordni','AlumnoController@buscarAlumno' );
+
 Route::get('/visualizarMatricula','MatriculaController@visualizarMatricula');
+
+
+
+
 /*  RUTAS PARA LA GESTION DE ALUMNOS */
 Route::resource('alumno','AlumnoController');
+Route::get('/editar_alumno','AlumnoController@editaralumno' );
 Route::get('/administrador_inicio','AlumnoController@index')->name('admi.index');
 
 /**
  *  DISTINAS RUTAS PARA LA GESTION DEL MODULO
  */
-Route::get('/showRegistroModulo','ModuloController@showRegistroModulo');
+Route::get('/showRegistroModulo','ModuloController@showRegistroModulo')->name('modulo.registrar');
 Route::post('/registrarModulo','ModuloController@registrarModulo');
-Route::get('/showModulos','ModuloController@mostrarModulos');
+Route::get('/showModulos','ModuloController@mostrarModulos')->name('modulo.show');
 //Route::get('/getModulo/{id}','ModuloController@getModulo');
 //Route::post('/editarModulo/{id}','ModuloController@editarModulo');
 //Route::post('borrarModulo/{id}','ModuloController@borrarModulo');
@@ -115,6 +195,7 @@ Route::get('/alumnoReporteMatricula','GAlumnoMatriculaController@reporteMatricul
 Route::get('/informacion','GAlumnoMatriculaController@perfil')->name('alumno.perfil');
 Route::get('/verReporteNotas/{id}','GAlumnoMatriculaController@mostrarReporteNotas')->name('reporte.nomina');
 Route::get('/reporteEvaluaciones','GAlumnoMatriculaController@reporteEvaluaciones')->name('reporte.evaluaciones');
+Route::post('/registraralumnos','AlumnoController@registrarte' )->name('alumno.registrarte');
 
 /**
  *  PDF

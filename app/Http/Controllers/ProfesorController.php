@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\QueryException;
 use App\Profesor;
 use App\Distrito;
 use App\User;
@@ -12,6 +13,9 @@ use App\Grupo;
 use App\Nomina;
 use App\Periodo;
 use Auth;
+
+use Illuminate\Http\Request;
+
 class ProfesorController extends Controller
 {
     function __construct(){
@@ -37,7 +41,13 @@ class ProfesorController extends Controller
         $distritos = Distrito::where('provincia_id',15)->get();
         return view('create_profesor',compact('distritos'));
     }
-    
+   
+    public function registrarprofesor()
+    {
+        $distritos = Distrito::where('provincia_id',15)->get();
+        return view('create_profesor',compact('distritos'));
+    }
+
     public function obtenerProfesor(Request $request, $id){
         
         if($request->ajax()){
@@ -59,6 +69,12 @@ class ProfesorController extends Controller
         /*SE PUEDE MEJORAR USANDO CLASES REQUEST
         $this->validate($request,['nombres'=>'required', 'apellido-paterno'=>'required', 'apellido-materno'=>'required','sexo'=>'required','fecha-nacimiento'=>'required']);
         */
+        try{
+          $fechanacimiento = request('fecha-nacimiento');
+          if ($fechanacimiento >= now()->toDateString()){
+            Session::flash('message', 'INGRESO DE FECHA INCORRECTO');
+            return redirect()->route('registrar.profesor'); 
+        }
         $periodo_actual = Periodo::where('estado',1)->first();
         Profesor::create([
                 'nom_prof' => request('nombres'),
@@ -82,8 +98,13 @@ class ProfesorController extends Controller
                 'password'=>bcrypt(request('dni'))
             ]
         );
-        return view('profesor_index');
-        
+        $confirmación="registro correctamente";
+        $distritos = Distrito::where('provincia_id',15)->get();
+        return view('create_profesor',compact('distritos','confirmación'));
+                  }catch( QueryException  $e) { 
+                Session::flash('message', 'VERIFIQUE LOS DATOS INGRESADOS');
+                return redirect()->route('registrar.profesor'); 
+        } 
     }
 
     /**
@@ -170,8 +191,54 @@ class ProfesorController extends Controller
         return view('administrador_listar_profesores',compact('profesores'));
     }
     
+    public function buscarprofesorpag()
+    {
+        
+        return view('profesor_buscar');
+    }
+
+    public function eliminarprofesorpag()
+    {
+        
+        return view('profesor_eliminar');
+    }
     
+    public function profesoreliminar(){
+        return view('profesor_eliminar');
+    }
+
+    public function eliminarprofesor(Request $request){
+        dd("sadasd");
+        $dni = request('category_id');
+        $profesor=Profesor::getProfesorpordni($dni);
+        $profesor->each->delete();
+        //Flash::warning('El usuario ha sido eliminado correctamente');
+        Session::flash('message', 'El usuario ha sido eliminado correctamente');
+        return redirect()->route('profesor.eliminar');
+       } 
+
+
+    public function eliminandoprofesor (Request $request){
+        $dni = request('category_id');
+        $profesor=Profesor::getProfesorpordni($dni);
+        $profesor->each->delete();
+        Session::flash('message', 'El usuario ha sido eliminado correctamente');
+        return redirect()->route('profesor.eliminar');
+       } 
+
+
+    public function buscarprofesor(Request $request){
+        $dni=$request->input('dni');
+        $profesor=Profesor::getProfesorpordni($dni);
+        return view('profesor_buscar')->with('profesor',$profesor);
+    }
     
+    public function buscarprofesoreliminar(Request $request){
+        $dni=$request->input('dni');
+        $profesor=Profesor::getProfesorpordni($dni);
+        return view('profesor_eliminar')->with('profesor',$profesor);
+    }
+
 // METODOS PARA PERFIL PROFESOR *******************************************
     
     public function verPerfil(){

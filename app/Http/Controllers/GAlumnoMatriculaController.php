@@ -8,6 +8,8 @@ use App\Alumno;
 use App\Grupo;
 use App\Modulo;
 use App\Profesor;
+use App\Periodo;
+
 use App\Turno;
 use App\Frecuencia;
 use Auth;
@@ -42,9 +44,15 @@ class GAlumnoMatriculaController extends Controller
         $correo=Auth::user()->email;
         $alumno=Alumno::getAlumno($correo);
         $matriculs=$alumno->matriculas; //genera las matriculas que tiene el alumno
-
+        $periodo = array();
+        $fil=0;
+        foreach($matriculs as $mat){
+            $periodo[$fil] = Periodo::find($mat->periodo_id);
+            $fil++;
+        }
         return view('alumno_reporte_matricula',[
-            'matriculs'=>$matriculs
+            'matriculs'=>$matriculs,
+            'periodo' => $periodo
         ]);
     }
 

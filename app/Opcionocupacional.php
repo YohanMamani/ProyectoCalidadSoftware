@@ -15,4 +15,8 @@ class Opcionocupacional extends Model
     function familiaProfesional(){
         return $this->belongsTo(Familiaprofesional::class);
     }
+
+     static function getopcion($id){
+        return Opcionocupacional::where('id','=',$id )->get();
+    }
 }

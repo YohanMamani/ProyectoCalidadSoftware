@@ -158,8 +158,9 @@ return [
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Infinety\Alerts\AlertServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -169,7 +170,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
@@ -220,6 +221,7 @@ return [
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'View' => Illuminate\Support\Facades\View::class,
 
     ],

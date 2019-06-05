@@ -11,7 +11,7 @@
                     <div class="form-row"> 
                         <div class="form-group col-md-9">
                             <label class="titulo-label">Módulo</label>                            
-                            <select  class="form-control" name="modulo">
+                            <select  class="form-control" style="height:30px" name="modulo">
                                 <option value="vacio" selected> </option>
                                 <option value="modulo1">Módulo 1</option>
                                 <option value="modulo2">Módulo 2</option>

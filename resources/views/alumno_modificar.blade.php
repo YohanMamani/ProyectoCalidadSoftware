@@ -5,18 +5,18 @@
 
     <div class="contenido-main">
                 <div class="titulo-formulario">
-                    <h2>Modificar <span>Profesor</span></h2>
+                    <h2>Modificar <span>Alumno</span></h2>
                 </div>
 
                 <div class="container" style="margin: 0 auto 20px auto">
                     <div class="row">
-                        <div class="col-sm-4 col-sm-offset-2">
+                        <div class="col-sm-6 col-sm-offset-2">
                             <div id="imaginary_container"> 
                                 <div class="input-group stylish-input-group">
-                                    <select class="form-control" style="height:30px" name="tag" id="tag">
+                                    <select class="form-control" style="height:30px" name="tags" id="tags">
                                        <option value="">Seleccionar</option>
-                                        @foreach($profesores as $pro)
-                                            <option value="{{$pro->id}}">{{$pro->nom_prof . " " . $pro->apePaterno_prof. " " .$pro->apeMaterno_prof}}</option>
+                                        @foreach($alumnos as $alumno)
+                                            <option value="{{$alumno->dni}}">{{$alumno->nombres . " " . $alumno->apePaterno. " " .$alumno->apeMaterno}}</option>
                                         @endforeach
                                     </select>                          
                                 </div>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="formulario" action= "/modificarprofesor" role="form" method="POST">
+                <form class="formulario" action= "/modificaralumno" role="form" method="POST">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label class="titulo-label">Nombres</label>
@@ -70,14 +70,6 @@
                             <label class="titulo-label">Fecha de nacimiento</label>
                             <input type="date" class="form-control" name="fecha-nacimiento" id="fecha-nacimiento" required>
                         </div>
-                        
-                        <div class="form-group col-md-6">
-                            <label class="titulo-label">Estado</label>
-                            <select class="form-control" style="height:30px" name="estado" id="estado">
-                                <option type="number_format" value= "1">Activo</option>
-                                <option type="number_format" value= "0">Inhabilitado</option>
-                            </select>
-                        </div>
                     </div>
                     
                     <div class="form-row">
@@ -89,10 +81,6 @@
                             <label class="titulo-label">Correo Electronico</label>
                             <input type="text" class="form-control" name="correo" id="correo" placeholder="" required>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text"  class="form-control" id="idprof" name="idprof" hidden>
                     </div>
                     
                     <div class="botones">
