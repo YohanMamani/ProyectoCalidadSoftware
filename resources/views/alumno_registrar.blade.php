@@ -41,7 +41,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="titulo-label">Sexo</label>                            
-                                <select  class="form-control" style="height:30px"   name="sexo">
+                                <select  class="form-control" style="height:39px"   name="sexo">
                                     <option value="m" selected>Masculino</option>
                                     <option value="f">Femenino</option>
                                 </select>
