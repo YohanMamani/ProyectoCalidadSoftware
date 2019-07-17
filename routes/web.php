@@ -62,6 +62,7 @@ Route::get('/profesor_inicio','ProfesorController@index')->name('profesor.index'
 
 /*  RUTAS PARA LA GESTION DE GRUPOS */
 Route::resource('grupo','GrupoController');
+//Route::get('/grupo/create','@GrupoController@create')
 Route::get('/obtenergrupos/{id}','GrupoController@listarGrupos');
 Route::get('/obtenergrupo/{id}','GrupoController@BuscarGrupo');
 

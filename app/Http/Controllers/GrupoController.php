@@ -68,7 +68,12 @@ class GrupoController extends Controller
     public function store(Request $request)
     {
         $periodo_actual = Periodo::where('estado',1)->first();
-        Grupo::create([
+        
+        $cruce = $this->verificacion_grupos(request('nombres'),request('frecuencia'),request('turno'));
+        if($cruce){
+            return redirect()->route('grupo.create')->with('msj','Ya existe un horario igual para ese profesor');
+        }else{
+            Grupo::create([
                 'fecInicio' => request('fecha-inicio'),
                 'fecFin' => request('fecha-fin'),
                 'profesor_id' => request('nombres'),
@@ -77,14 +82,28 @@ class GrupoController extends Controller
                 'frecuencia_id' => request('frecuencia'),
                 'periodo_id' => $periodo_actual->id,
                 'nro_matriculados' => 0 //default
-        ]);
+            ]);
 
-        $confirmación="registro correctamente";
-        $profesores = Profesor::all();
-        $modulos = Modulo::all();
-        $turnos = Turno::all();
-        $frecuencias = Frecuencia::all();
-        return view('asignar_profesor',compact('profesores','modulos','turnos','frecuencias','confirmación'));
+            $confirmación="registro correctamente";
+            $profesores = Profesor::all();
+            $modulos = Modulo::all();
+            $turnos = Turno::all();
+            $frecuencias = Frecuencia::all();
+            return view('asignar_profesor',compact('profesores','modulos','turnos','frecuencias','confirmación'));
+        }
+    }
+    
+    
+    public function verificacion_grupos($id_profesor, $id_frecuencia, $id_turno){
+        $resultado=false;
+        
+        $grupo_cruce = Grupo::where(['profesor_id'=> $id_profesor, 'turno_id'=>$id_frecuencia,'frecuencia_id'=>$id_frecuencia])->get();
+        if($grupo_cruce->isEmpty()){
+            
+        }else{
+            $resultado=true;
+        }
+        return $resultado;
     }
 
     /**

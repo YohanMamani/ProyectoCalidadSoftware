@@ -7,7 +7,14 @@
         <div class="titulo-formulario">
                     <h2>Realizar <span>Asignación de Docentes</span></h2>
                 </div>
-
+                
+                @if(session()->has('msj'))
+                    <div class="alert alert-danger" role="alert">{{ session('msj') }} </div>
+                    <br>
+                @else
+                
+                @endif
+                
                 <form class="formulario" action="{{ route('grupo.store') }}"  role="form"   method="POST">
                     {{csrf_field()}}
                     <div class="form-group">
